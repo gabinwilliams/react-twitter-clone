@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import {SignupPage} from './Pages/SignupPage';
+
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/signup">
-          sign up
+          <SignupPage/>
         </Route>
         <Route path="/signin">
 	  	  sign in
