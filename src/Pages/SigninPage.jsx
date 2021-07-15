@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useForm} from 'react-hook-form';
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import {
@@ -16,6 +17,8 @@ import { supabaseClient } from '../api/supabaseClient';
 
 
 export function SigninPage() {
+
+  const history = useHistory();
 
   const validationSchema = Yup.object().shape({
 
@@ -48,6 +51,8 @@ export function SigninPage() {
       if(res.user){
       console.log(res.user)
       alert("signed in successfully!")
+      // route user to home page
+      history.push("/")
       }else{
         alert("sign in unsuccessful!")
       }

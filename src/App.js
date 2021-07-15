@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {SignupPage} from './Pages/SignupPage';
 import {SigninPage} from './Pages/SigninPage';
 import {SignoutPage} from './Pages/SignoutPage';
+import { supabaseClient } from './api/supabaseClient';
 
 function App() {
   return (
@@ -19,11 +20,18 @@ function App() {
           <SignoutPage/>
         </Route>
         <Route path="/">
-          Home
+          <HomePage/>
         </Route>
       </Switch>
     </Router>
   );
+}
+
+const HomePage = () => {
+  const session = supabaseClient.auth.session()
+  return <div>
+    {session && `you are logged in as ${session.user.email}`}
+  </div>
 }
 
 export default App;
