@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/signup">
-          <SignupPage/>
+          <SignupPage />
         </Route>
         <Route path="/signin">
 	  	  sign in
