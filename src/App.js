@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import {SignupPage} from './Pages/SignupPage';
+import {SigninPage} from './Pages/SigninPage';
+import {SignoutPage} from './Pages/SignoutPage';
 
 function App() {
   return (
@@ -11,10 +13,10 @@ function App() {
           <SignupPage />
         </Route>
         <Route path="/signin">
-	  	  sign in
+	  	  <SigninPage/>
         </Route>
         <Route path="/signout">
-          sign out 
+          <SignoutPage/>
         </Route>
         <Route path="/">
           Home
