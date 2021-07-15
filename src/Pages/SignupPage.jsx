@@ -13,6 +13,8 @@ import {
   Button
 } from '@material-ui/core';
 
+import { supabaseClient } from '../api/supabaseClient';
+
 
 export function SignupPage() {
 
@@ -36,8 +38,16 @@ export function SignupPage() {
     // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
   });
 
-  const onSubmit = data => {
-    console.log(JSON.stringify(data, null, 2));
+  const onSubmit = ({ email, password }) => {
+    supabaseClient.auth.signUp({
+      email,
+      password,
+    }).then(res => {
+      console.log(res.user)
+      alert("signed up successfully! check your email!")
+    }).catch(err => {
+      console.error(err)
+    });
   };
 
   const {
@@ -172,7 +182,7 @@ export function SignupPage() {
               color="primary"
               onClick={handleSubmit(onSubmit)}
             >
-              Register
+              SignUp
             </Button>
           </Box>
         </Box>
