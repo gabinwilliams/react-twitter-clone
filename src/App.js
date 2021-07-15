@@ -30,6 +30,7 @@ function App() {
 const HomePage = () => {
   const session = supabaseClient.auth.session()
   return <div>
+    <h5>HOME</h5>
     {session && `you are logged in as ${session.user.email}`}
   </div>
 }

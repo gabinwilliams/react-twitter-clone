@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+
 import * as Yup from 'yup';
 import {
   Paper,
@@ -8,8 +10,6 @@ import {
   Grid,
   TextField,
   Typography,
-  FormControlLabel,
-  Checkbox,
   Button
 } from '@material-ui/core';
 
@@ -20,11 +20,6 @@ export function SignupPage() {
 
   const validationSchema = Yup.object().shape({
 
-    // fullname: Yup.string().required('Fullname is required'),
-    // username: Yup.string()
-    //   .required('Username is required')
-    //   .min(6, 'Username must be at least 6 characters')
-    //   .max(20, 'Username must not exceed 20 characters'),
     email: Yup.string()
       .required('Email is required')
       .email('Email is invalid'),
@@ -35,7 +30,7 @@ export function SignupPage() {
     confirmPassword: Yup.string()
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-    // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
+    
   });
 
   const onSubmit = ({ email, password }) => {
@@ -52,7 +47,6 @@ export function SignupPage() {
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors }
   } = useForm({
@@ -68,36 +62,7 @@ export function SignupPage() {
           </Typography>
 
           <Grid container spacing={1}>
-            {/* <Grid item xs={12} sm={12}>
-              <TextField
-                required
-                id="fullname"
-                name="fullname"
-                label="Full Name"
-                fullWidth
-                margin="dense"
-                {...register('fullname')}
-                error={errors.fullname ? true : false}
-              />
-              <Typography variant="inherit" color="textSecondary">
-                {errors.fullname?.message}
-              </Typography>
-            </Grid> */}
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="username"
-                name="username"
-                label="Username"
-                fullWidth
-                margin="dense"
-                {...register('username')}
-                error={errors.username ? true : false}
-              />
-              <Typography variant="inherit" color="textSecondary">
-                {errors.username?.message}
-              </Typography>
-            </Grid> */}
+           
             <Grid item xs={12} sm={6}>
               <TextField
                 required
@@ -145,35 +110,7 @@ export function SignupPage() {
                 {errors.confirmPassword?.message}
               </Typography>
             </Grid>
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Controller
-                    control={control}
-                    name="acceptTerms"
-                    defaultValue="false"
-                    inputRef={register()}
-                    render={({ field: { onChange } }) => (
-                      <Checkbox
-                        color="primary"
-                        onChange={e => onChange(e.target.checked)}
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <Typography color={errors.acceptTerms ? 'error' : 'inherit'}>
-                    I have read and agree to the Terms *
-                  </Typography>
-                }
-              /> */}
-              {/* <br /> */}
-              {/* <Typography variant="inherit" color="textSecondary">
-                {errors.acceptTerms
-                  ? '(' + errors.acceptTerms.message + ')'
-                  : ''}
-              </Typography>
-            </Grid>*/}
+           
           </Grid> 
 
           <Box mt={3}>
@@ -184,6 +121,7 @@ export function SignupPage() {
             >
               SignUp
             </Button>
+            
           </Box>
         </Box>
       </Paper>

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useForm} from 'react-hook-form';
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom"; // use RouterLink as alias for react-router-dom's Link component so that the names don't collide.
 import { useHistory } from "react-router";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -64,66 +65,73 @@ export function SigninPage() {
   return (
     <Fragment>
       <Paper>
-        <Box px={3} py={2}>
-          <Typography variant="h6" align="center" margin="dense">
-            SignIn Page!
-          </Typography>
+        <div style={{ padding: 20 }}>
+          <Box px={3} py={2}>
+            <Typography variant="h6" align="center" margin="dense">
+              SignIn Page!
+            </Typography>
 
-          <Grid container spacing={1}>
-           
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="email"
-                name="email"
-                label="Email"
-                fullWidth
-                margin="dense"
-                {...register('email')}
-                error={errors.email ? true : false}
-              />
-              <Typography variant="inherit" color="textSecondary">
-                {errors.email?.message}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                fullWidth
-                margin="dense"
-                {...register('password')}
-                error={errors.password ? true : false}
-              />
-              <Typography variant="inherit" color="textSecondary">
-                {errors.password?.message}
-              </Typography>
-            </Grid>
-          
-          </Grid> 
-
-          <Box mt={3}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit(onSubmit)}
+            <Grid container 
+            spacing={1}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
             >
-              SignIn
-            </Button>
-            <Link to="/signup">
-                <Button
-                
+            
+              <Grid item xs={12} sm={6} >
+                <TextField
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  fullWidth
+                  margin="dense"
+                  {...register('email')}
+                  error={errors.email ? true : false}
+                />
+                <Typography variant="inherit" color="textSecondary">
+                  {errors.email?.message}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6} >
+                <TextField
+                  required
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                  margin="dense"
+                  {...register('password')}
+                  error={errors.password ? true : false}
+                />
+                <Typography variant="inherit" color="textSecondary">
+                  {errors.password?.message}
+                </Typography>
+              </Grid>
+            
+            </Grid> 
+
+            <Grid item s={12} sm={6} >
+              <Button
+                variant="contained"
                 color="primary"
-                >
-                  SignUp
-                </Button>
+                onClick={handleSubmit(onSubmit)}
+              >
+                Sign In
+              </Button>
+              <Link
+                underline="none"
+                to="/signup"
+                component={RouterLink}
+                color="inherit"
+              >
+                <Button color="inherit">Sign up</Button>
               </Link>
+            </Grid>
+            
           </Box>
-          
-        </Box>
+        </div>
       </Paper>
     </Fragment>
   );
