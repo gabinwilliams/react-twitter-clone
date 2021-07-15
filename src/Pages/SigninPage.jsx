@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm} from 'react-hook-form';
 import { Link } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -9,8 +9,6 @@ import {
   Grid,
   TextField,
   Typography,
-  FormControlLabel,
-  Checkbox,
   Button
 } from '@material-ui/core';
 
@@ -28,17 +26,13 @@ export function SigninPage() {
       .required('Password is required')
       .min(6, 'Password must be at least 6 characters')
       .max(40, 'Password must not exceed 40 characters'),
-    // confirmPassword: Yup.string()
-    //   .required('Confirm Password is required')
-    //   .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-    // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
+   
   });
 
   
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors }
   } = useForm({
@@ -67,7 +61,7 @@ export function SigninPage() {
       <Paper>
         <Box px={3} py={2}>
           <Typography variant="h6" align="center" margin="dense">
-            React Hook Form - Material UI - Validation
+            SignIn Page!
           </Typography>
 
           <Grid container spacing={1}>
@@ -103,22 +97,7 @@ export function SigninPage() {
                 {errors.password?.message}
               </Typography>
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="confirmPassword"
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                fullWidth
-                margin="dense"
-                {...register('confirmPassword')}
-                error={errors.confirmPassword ? true : false}
-              />
-              <Typography variant="inherit" color="textSecondary">
-                {errors.confirmPassword?.message}
-              </Typography>
-            </Grid> */}
+          
           </Grid> 
 
           <Box mt={3}>
@@ -131,7 +110,7 @@ export function SigninPage() {
             </Button>
             <Link to="/signup">
                 <Button
-                // variant="contained"
+                
                 color="primary"
                 >
                   SignUp
