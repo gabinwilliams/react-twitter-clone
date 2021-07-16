@@ -1,21 +1,14 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  Paper,
-  Box,
-  Typography,
-  Button
-} from '@material-ui/core';
+import { Paper, Box, Typography, Button } from "@material-ui/core";
 
-import { supabaseClient } from '../api/supabaseClient';
-
+import { supabaseClient } from "../api/supabaseClient";
 
 export function SignoutPage() {
-
-  useEffect(()=> {
-    supabaseClient.auth.signOut()
-},[])   
+  useEffect(() => {
+    supabaseClient.auth.signOut();
+  }, []);
 
   return (
     <Fragment>
@@ -26,21 +19,16 @@ export function SignoutPage() {
           </Typography>
 
           <Box mt={3}>
-          You've been signed out.
-        <Link to="/">
-            <Button>
-                Go to home page
-            </Button>
-        </Link>
-        <Link to="/signin">
-            <Button>
-                Sign in
-            </Button>
-        </Link>
+            You've been signed out.
+            <Link to="/">
+              <Button>Go to home page</Button>
+            </Link>
+            <Link to="/signin">
+              <Button>Sign in</Button>
+            </Link>
           </Box>
-          
         </Box>
       </Paper>
     </Fragment>
   );
-};
+}

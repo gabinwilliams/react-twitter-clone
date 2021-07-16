@@ -1,56 +1,52 @@
-import React, { Fragment } from 'react';
-import { useForm} from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React, { Fragment } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import {
   Paper,
   Box,
   Grid,
   TextField,
   Typography,
-  Button
-} from '@material-ui/core';
+  Button,
+} from "@material-ui/core";
 
-import { supabaseClient } from '../api/supabaseClient';
-
+import { supabaseClient } from "../api/supabaseClient";
 
 export function SignupPage() {
-
   const validationSchema = Yup.object().shape({
-
-    email: Yup.string()
-      .required('Email is required')
-      .email('Email is invalid'),
+    email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .max(40, 'Password must not exceed 40 characters'),
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters")
+      .max(40, "Password must not exceed 40 characters"),
     confirmPassword: Yup.string()
-      .required('Confirm Password is required')
-      .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-    
+      .required("Confirm Password is required")
+      .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
   });
 
   const onSubmit = ({ email, password }) => {
-    supabaseClient.auth.signUp({
-      email,
-      password,
-    }).then(res => {
-      console.log(res.user)
-      alert("signed up successfully! check your email!")
-    }).catch(err => {
-      console.error(err)
-    });
+    supabaseClient.auth
+      .signUp({
+        email,
+        password,
+      })
+      .then((res) => {
+        console.log(res.user);
+        alert("signed up successfully! check your email!");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
   });
 
   return (
@@ -62,7 +58,6 @@ export function SignupPage() {
           </Typography>
 
           <Grid container spacing={1}>
-           
             <Grid item xs={12} sm={6}>
               <TextField
                 required
@@ -71,7 +66,7 @@ export function SignupPage() {
                 label="Email"
                 fullWidth
                 margin="dense"
-                {...register('email')}
+                {...register("email")}
                 error={errors.email ? true : false}
               />
               <Typography variant="inherit" color="textSecondary">
@@ -87,7 +82,7 @@ export function SignupPage() {
                 type="password"
                 fullWidth
                 margin="dense"
-                {...register('password')}
+                {...register("password")}
                 error={errors.password ? true : false}
               />
               <Typography variant="inherit" color="textSecondary">
@@ -103,15 +98,14 @@ export function SignupPage() {
                 type="password"
                 fullWidth
                 margin="dense"
-                {...register('confirmPassword')}
+                {...register("confirmPassword")}
                 error={errors.confirmPassword ? true : false}
               />
               <Typography variant="inherit" color="textSecondary">
                 {errors.confirmPassword?.message}
               </Typography>
             </Grid>
-           
-          </Grid> 
+          </Grid>
 
           <Box mt={3}>
             <Button
@@ -121,14 +115,9 @@ export function SignupPage() {
             >
               SignUp
             </Button>
-            
           </Box>
         </Box>
       </Paper>
     </Fragment>
   );
-};
-
-
-
-
+}
